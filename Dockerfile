@@ -1,4 +1,5 @@
-from         ubuntu:12.04
+FROM ubuntu:14.04
+
 maintainer   Matt Williamson "matt@aimatt.com"
 
 # Be sure to have btsync.conf in the same dir as this file
@@ -6,14 +7,13 @@ maintainer   Matt Williamson "matt@aimatt.com"
 
 # Upstart+Docker Hack
 RUN dpkg-divert --local --rename --add /sbin/initctl
-RUN ln -s /bin/true /sbin/initctl
+RUN ln -fs /bin/true /sbin/initctl
 
-RUN apt-get install python-software-properties -y
+RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:tuxpoldo/btsync -y
 RUN apt-get update
 RUN export DEBIAN_FRONTEND=noninteractive; apt-get install btsync -y -q
 RUN rm -f /etc/btsync/debconf-default.conf
-ADD btsync.conf /etc/btsync/btsync.conf
 RUN restart btsync
 EXPOSE 3369/udp
 EXPOSE 8888
