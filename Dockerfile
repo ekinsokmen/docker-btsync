@@ -15,8 +15,10 @@ RUN apt-get update
 RUN export DEBIAN_FRONTEND=noninteractive; apt-get install btsync -y -q
 RUN rm -f /etc/btsync/debconf-default.conf
 RUN restart btsync
-EXPOSE 3369/udp
+
+EXPOSE 3838/udp
 EXPOSE 8888
+EXPOSE 55000
 
 CMD ["/usr/lib/btsync/btsync-daemon", "--nodaemon", "--config", "/etc/btsync/btsync.conf"]
 
