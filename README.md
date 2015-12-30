@@ -1,3 +1,11 @@
+## Fork update:
+To run with a btsync.conf outside of the image:
+
+    docker build -t ekinsokmen/btsync .
+    docker run -v /home/btsync:/root/btsync:rw -v ~/config/btsync/:/etc/btsync:rw ekinsokmen/btsync
+
+---
+
 # Bittorrent Sync Docker Container
 
 This is a simple docker file to setup a [bittorrent sync](http://labs.bittorrent.com/experiments/sync.html) server. Just
